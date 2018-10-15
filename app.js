@@ -23,7 +23,8 @@ let user=require('./user');
 app.use('/user',user);
 var private_message = require('./private_msg');
 app.use('/message',private_message);
-
+var group_message = require('./group_msg');
+app.use('/message',group_message);
 //rest methods
 app.get('/', function(req,res){
     console.log("Get Request");
