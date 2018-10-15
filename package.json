@@ -1,0 +1,16 @@
+{
+  "name": "realhack",
+  "version": "1.0.0",
+  "description": "online chat with firebase",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ajanthasingam",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "firebase": "^5.5.4",
+    "firebase-admin": "^6.0.0"
+  }
+}
