@@ -5,14 +5,11 @@ var ref=db.ref("database");
 const bodyParser = require('body-parser');
 const router=express.Router();
 
-
-
 var userRef= ref.child("/User");
 
 
 
 router.post('/register',function(req,res){
-  console.log("1");
   var uname = req.body.user_name;
   var mail=req.body.email;
   var pword=req.body.password;
@@ -26,23 +23,25 @@ router.post('/register',function(req,res){
 .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
     console.log("Successfully created new user:", userRecord.uid);
-    writeUserData(uname,mail,pword);
+    writeUserData(uname,mail);
   })
   .catch(function(error) {
-    console.log("Error creating new user:", error);
+    console.log("Email already exists:", error);
+      status:error;
+
   });
+    res.json({
+        status:"success"
+    });
 
 })
 
-function writeUserData(uname, mail, pword){
-  console.log("2");
-  userRef.set({
-  // "email": mail,
-    "password": pword,
-    "user_name": uname
-})
+function writeUserData(uname, mail){
+  userRef.push().set({
+      email: mail,
+      user_name: uname,
+});
   
-  console.log("3");
 }
 
 

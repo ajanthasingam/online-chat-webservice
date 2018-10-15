@@ -21,7 +21,8 @@ admin.initializeApp({
 
 let user=require('./user');
 app.use('/user',user);
-
+var private_message = require('./private_msg');
+app.use('/message',private_message);
 
 //rest methods
 app.get('/', function(req,res){
