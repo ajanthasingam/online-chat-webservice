@@ -3,31 +3,26 @@ const bodyParser = require('body-parser');
 
 
 var app =express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //firebase
 var admin = require('firebase-admin');
 
 var serviceAccount = require('./chat-service-007.json');
 
-
-
-
-
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://chat-service-007.firebaseio.com/',
-    
+    databaseURL: 'https://chat-service-007.firebaseio.com/'
+
 });
 
-
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use(bodyParser.json());
 
 
 let user=require('./user');
 app.use('/user',user);
-
+var private_message = require('./private_msg');
+app.use('/message',private_message);
 
 //rest methods
 app.get('/', function(req,res){

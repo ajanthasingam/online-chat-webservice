@@ -5,15 +5,17 @@ var ref=db.ref("chat-system");
 
 const router=express.Router();
 
-
-
 var userRef= ref.child("/User");
 
 
 
 router.post('/register',function(req,res){
+<<<<<<< HEAD
   console.log("1");
   var uname = req.body["user_name"];
+=======
+  var uname = req.body.user_name;
+>>>>>>> b3514124e6f7521daf0f05642e45ed86db0402bd
   var mail=req.body.email;
   var pword=req.body.password;
 
@@ -29,16 +31,26 @@ router.post('/register',function(req,res){
 .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
     console.log("Successfully created new user:", userRecord.uid);
+<<<<<<< HEAD
     console.log(userRecord.user_name);
     writeUserData(userRecord.user_name,userRecord.email);
     
+=======
+    writeUserData(uname,mail);
+>>>>>>> b3514124e6f7521daf0f05642e45ed86db0402bd
   })
   .catch(function(error) {
-    console.log("Error creating new user:", error);
+    console.log("Email already exists:", error);
+      status:error;
+
   });
+    res.json({
+        status:"success"
+    });
 
 })
 
+<<<<<<< HEAD
 function writeUserData( uname, mail){
     
   console.log(uname);
@@ -48,8 +60,14 @@ function writeUserData( uname, mail){
     title: [mail]
   });
   
+=======
+function writeUserData(uname, mail){
+  userRef.push().set({
+      email: mail,
+      user_name: uname,
+});
+>>>>>>> b3514124e6f7521daf0f05642e45ed86db0402bd
   
-  console.log("3");
 }
 
 
