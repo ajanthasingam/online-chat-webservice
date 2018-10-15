@@ -1,8 +1,8 @@
 var express=require('express');
 var admin= require('firebase-admin');
 var db=admin.database();
-var ref=db.ref("database");
-const bodyParser = require('body-parser');
+var ref=db.ref("chat-system");
+
 const router=express.Router();
 
 
@@ -13,9 +13,12 @@ var userRef= ref.child("/User");
 
 router.post('/register',function(req,res){
   console.log("1");
-  var uname = req.body.user_name;
+  var uname = req.body["user_name"];
   var mail=req.body.email;
   var pword=req.body.password;
+
+  console.log(uname);
+  console.log(req.body.user_name);
 
   admin.auth().createUser({
     email: mail,
@@ -26,7 +29,9 @@ router.post('/register',function(req,res){
 .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
     console.log("Successfully created new user:", userRecord.uid);
-    writeUserData(uname,mail,pword);
+    console.log(userRecord.user_name);
+    writeUserData(userRecord.user_name,userRecord.email);
+    
   })
   .catch(function(error) {
     console.log("Error creating new user:", error);
@@ -34,13 +39,15 @@ router.post('/register',function(req,res){
 
 })
 
-function writeUserData(uname, mail, pword){
-  console.log("2");
-  userRef.set({
-  // "email": mail,
-    "password": pword,
-    "user_name": uname
-})
+function writeUserData( uname, mail){
+    
+  console.log(uname);
+  console.log(mail);
+  userRef.push().set({
+    author: [uname],
+    title: [mail]
+  });
+  
   
   console.log("3");
 }
