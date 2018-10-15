@@ -1,5 +1,6 @@
 var express = require ('express');
 
+
 var app =express();
 
 //firebase
@@ -12,6 +13,10 @@ admin.initializeApp({
     databaseURL: 'https://chat-service-007.firebaseio.com/'
 });
 
+
+
+let user=require('./user');
+app.use('/user',user);
 
 
 //rest methods
@@ -46,3 +51,6 @@ var server =app.listen(3000, function(){
     console.log ("Server listening at http://%s:%s",host,port);
     
 });
+
+
+
