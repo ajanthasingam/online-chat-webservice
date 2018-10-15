@@ -1,7 +1,8 @@
 var express=require('express');
 var admin= require('firebase-admin');
 var db=admin.database();
-var ref=db.ref("chat-system");
+var firebase = require('firebase');
+var ref=db.ref("database");
 
 const router=express.Router();
 
@@ -18,7 +19,7 @@ router.post('/register',function(req,res){
 
 
 
-  admin.auth().createUserWithEmailAndPassword(email, password)
+  firebase.auth().createUserWithEmailAndPassword(email, password)
   .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
     console.log("Successfully created new user:", userRecord.uid);
@@ -60,7 +61,7 @@ router.get('/login', function(req, res){
 router.post('/login', function(req, res, next){
   var email= req.body.email;
   var password=req.body.password;
-  admin.auth().signInWithEmailAndPassword(email, password)
+  firebase.auth().signInWithEmailAndPassword(email, password)
   .then(function(){
     console.log("Login Successfully")
   })

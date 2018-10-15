@@ -1,16 +1,23 @@
 var express = require ('express');
 const bodyParser = require('body-parser');
 
-
 var app =express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //firebase
 var admin = require('firebase-admin');
+var firebase = require('firebase');
+
+var config = {
+    apiKey:  "AIzaSyAeHhd3zemmXXmxpAU6j1Kzc8MOQ-6rtqQ ",
+    authDomain: "chat-service-007.firebaseapp.com",
+    databaseURL: "https://chat-service-007.firebaseio.com/",
+    storageBucket: "gs://chat-service-007.appspot.com",
+};
+firebase.initializeApp(config);
 
 var serviceAccount = require('./chat-service-007.json');
-
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: 'https://chat-service-007.firebaseio.com/'
