@@ -6,7 +6,7 @@ var app =express();
 //firebase
 var admin = require('firebase-admin');
 
-var serviceAccount = require('chat-service-007.json');
+var serviceAccount = require('./chat-service-007.json');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -16,7 +16,11 @@ admin.initializeApp({
 
 
 let user=require('./user');
+var private_msg = require('./private_msg');
+app.use('/private_msg',private_msg);
+
 app.use('/user',user);
+
 
 
 //rest methods
