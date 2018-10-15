@@ -3,16 +3,15 @@ var express = require ('express');
 var app =express();
 
 //firebase
-var firebase = require('firebase');
-var config = {
-  apiKey: "APIKEY",
-  authDomain: "AUTHDOMAIN",
-  databaseURL: "TESTURL",
-  projectId: "PROJECTID",
-  storageBucket: "PROJECTBUCKET",
-  messagingSenderId: "ID"
-};
-firebase.initializeApp(config);
+var admin = require('firebase-admin');
+
+var serviceAccount = require('chat-service-007.json');
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://chat-service-007.firebaseio.com/'
+});
+
 
 
 //rest methods
