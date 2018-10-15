@@ -1,4 +1,5 @@
 var express = require ('express');
+const bodyParser = require('body-parser');
 
 
 var app =express();
@@ -6,13 +7,22 @@ var app =express();
 //firebase
 var admin = require('firebase-admin');
 
-var serviceAccount = require('chat-service-007.json');
+var serviceAccount = require('./chat-service-007.json');
+
+
+
+
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://chat-service-007.firebaseio.com/'
+    databaseURL: 'https://chat-service-007.firebaseio.com/',
+    
 });
 
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.json());
 
 
 let user=require('./user');
