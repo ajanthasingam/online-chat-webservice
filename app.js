@@ -1,7 +1,10 @@
 var express = require ('express');
+const bodyParser = require('body-parser');
 
 
 var app =express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //firebase
 var admin = require('firebase-admin');
@@ -11,16 +14,13 @@ var serviceAccount = require('./chat-service-007.json');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: 'https://chat-service-007.firebaseio.com/'
+
 });
 
 
 
 let user=require('./user');
-var private_msg = require('./private_msg');
-app.use('/private_msg',private_msg);
-
 app.use('/user',user);
-
 
 
 //rest methods
