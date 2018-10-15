@@ -4,13 +4,20 @@ var admin = require('firebase-admin');
 var router = express.Router();
 var db = admin.database();
 var ref = db.ref("database");
-var gr= ref.child('Group');
+var gr= ref.child('Groups');
 
 router.post('/create_group', function (req, res) {
     var group = req.body.group;
     var members = req.body.members;
-    var group_ref = gr.child(group);
-    var user = user_ref.o
+    gr.push({
+        group : group,
+        timecreated : Date.now(),
+            members : members
+        });
+    res.json({
+            status: 'msg sent'
+        }
+    );
 
 
 

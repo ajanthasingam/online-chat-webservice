@@ -25,6 +25,8 @@ var private_message = require('./private_msg');
 app.use('/message',private_message);
 var group_message = require('./group_msg');
 app.use('/message',group_message);
+var create_group = require('./create_group');
+app.use('/user',create_group);
 //rest methods
 app.get('/', function(req,res){
     console.log("Get Request");
