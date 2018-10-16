@@ -5,7 +5,7 @@ var router = express.Router();
 var db = admin.database();
 var ref = db.ref("database");
 var user_ref= ref.child('User');
-
+var auth = require('./api_auth');
 router.post('/send_private_msg', function (req, res) {
     var message = req.body.message;
     var receiver= req.body.receiver;
@@ -28,6 +28,6 @@ router.post('/send_private_msg', function (req, res) {
         );
     })
 
-})
+});
 
 const newLocal = module.exports = router;

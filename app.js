@@ -25,7 +25,10 @@ admin.initializeApp({
 });
 
 
-
+let api_auth=require('./api_auth');
+app.use('/api_user',api_auth);
+let api_user=require('./api_user');
+app.use('/api_user',api_user);
 let user=require('./user');
 app.use('/user',user);
 var private_message = require('./private_msg');

@@ -22,7 +22,7 @@ router.post('/register',function(req,res){
   firebase.auth().createUserWithEmailAndPassword(email, password)
   .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
-    console.log("Successfully created new user:", userRecord.uid);
+    console.log("Successfully created new user:", userRecord.email);
 
     writeUserData(uname,email);
 
@@ -63,7 +63,10 @@ router.post('/login', function(req, res, next){
   var password=req.body.password;
   firebase.auth().signInWithEmailAndPassword(email, password)
   .then(function(){
-    console.log("Login Successfully")
+    console.log("Login Successfully");
+      res.json({
+          status:"success"
+      });
   })
   .catch(function(error) {
     // Handle Errors here.
@@ -72,9 +75,7 @@ router.post('/login', function(req, res, next){
     // ...
   });
 
-  res.json({
-    status:"success"
-});
+
  
 });
 
